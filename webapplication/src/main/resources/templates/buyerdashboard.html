@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rentify - Client Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 60px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Client Dashboard</h2>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <form th:action="@{/filter}" method="get" class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" id="estateLocation" name="estateLocation" placeholder="Location">
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="number" class="form-control" id="minRooms" name="minRooms" placeholder="Min Bedrooms">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+        <div class="row" th:each="estate : ${estates}">
+            <div class="col-md-4">
+                <div class="card">
+                    <img th:src="@{${estate.imageUrl}}" class="card-img-top" alt="Estate Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${estate.title}"></h5>
+                        <p class="card-text">Location: <span th:text="${estate.location}"></span></p>
+                        <p class="card-text">Size: <span th:text="${estate.size}"></span> sq ft</p>
+                        <p class="card-text">Bedrooms: <span th:text="${estate.bedrooms}"></span></p>
+                        <p class="card-text">Bathrooms: <span th:text="${estate.bathrooms}"></span></p>
+                        <a th:href="@{/estate-details/{id}(id=${estate.id})}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

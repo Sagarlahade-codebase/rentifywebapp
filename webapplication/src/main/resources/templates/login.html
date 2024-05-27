@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rentify - Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f6f8;
+        }
+        .signin-container {
+            margin-top: 120px;
+        }
+        .card {
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container signin-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <h3 class="card-title text-center">Sign In</h3>
+                    <form th:action="@{/validateusr}" method="post">
+                        <div class="form-group">
+                            <label for="userEmail">Email Address</label>
+                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword">Password</label>
+                            <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+                    <div class="text-center">
+                        <a href="/signup" class="btn btn-link">Register as Buyer or Seller</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

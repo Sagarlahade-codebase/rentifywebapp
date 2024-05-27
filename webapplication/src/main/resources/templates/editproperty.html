@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Estate</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Edit Estate</h2>
+			<form th:action="@{'/update-property/' + ${estate.vendorId}}" th:object="${estate}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" th:field="*{location}" required>
+            </div>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <input type="number" class="form-control" th:field="*{size}" required>
+            </div>
+            <div class="form-group">
+                <label for="bedrooms">Bedrooms</label>
+                <input type="number" class="form-control" th:field="*{bedrooms}" required>
+            </div>
+            <div class="form-group">
+                <label for="bathrooms">Bathrooms</label>
+                <input type="number" class="form-control" th:field="*{bathrooms}" required>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">Image URL</label>
+                <input type="text" class="form-control" th:field="*{imageUrl}">
+            </div>
+            <div class="form-group">
+                <label for="nearbyHospitals">Nearby Hospitals</label>
+                <input type="text" class="form-control" th:field="*{nearbyHospitals}">
+            </div>
+            <div class="form-group">
+                <label for="nearbyColleges">Nearby Colleges</label>
+                <input type="text" class="form-control" th:field="*{nearbyColleges}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rentify - Vendor Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Vendor Dashboard</h2>
+        <div class="text-right mb-3">
+		<a th:href="@{/getProperty/{vendorId}(vendorId=${vendorId})}" class="btn btn-primary">Add New Property</a>        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Property ID</th>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Size</th>
+                    <th>Bedrooms</th>
+                    <th>Bathrooms</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="estate : ${properties}">
+                    <td th:text="${estate.id}"></td>
+                    <td th:text="${estate.title}"></td>
+                    <td th:text="${estate.location}"></td>
+                    <td th:text="${estate.size}"></td>
+                    <td th:text="${estate.bedrooms}"></td>
+                    <td th:text="${estate.bathrooms}"></td>
+                    <td>
+      					      <a th:href="@{/edit-property/{id}/{vendorId}(id=${estate.id},vendorId=${vendorId})}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{/delete-property/{id}/{vendorId}(id=${estate.id},vendorId=${vendorId})}" class="btn btn-sm btn-danger">Delete</a>
+                   
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

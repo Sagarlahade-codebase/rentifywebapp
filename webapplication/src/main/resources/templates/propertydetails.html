@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rentify - Estate Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Estate Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${estate.title}"></h5>
+                <p class="card-text">Location: <span th:text="${estate.location}"></span></p>
+                <p class="card-text">Size: <span th:text="${estate.size}"></span> sq ft</p>
+                <p class="card-text">Bedrooms: <span th:text="${estate.bedrooms}"></span></p>
+                <p class="card-text">Bathrooms: <span th:text="${estate.bathrooms}"></span></p>
+                <p class="card-text">Nearby Hospitals: <span th:text="${estate.hospitalsNearby}"></span></p>
+                <p class="card-text">Nearby Colleges: <span th:text="${estate.collegesNearby}"></span></p>
+                <a th:href="@{/contact-vendor/{id}(id=${estate.vendorId})}" class="btn btn-primary">I'm Interested</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
