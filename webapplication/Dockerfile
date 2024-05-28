@@ -25,7 +25,7 @@ FROM openjdk:17
 COPY --from=build /app/target/spring-boot-docker.jar demo.jar
 
 # Set environment variable for the port (optional)
-# ENV PORT=8080
+# ENV PORT=
 
 # Expose the port on which the application will run
 EXPOSE 8080
