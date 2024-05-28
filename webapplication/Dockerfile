@@ -2,7 +2,7 @@
 FROM maven:3.8.5-openjdk-17 AS build
 COPY pom.xml .
 COPY src ./src
-COPY Dockerfile .
+COPY Dockerfile ./Dockerfile
 RUN mvn clean package -DskipTests
 
 # Use a minimal JDK runtime image to run the application
