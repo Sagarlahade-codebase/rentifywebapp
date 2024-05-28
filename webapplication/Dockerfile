@@ -1,14 +1,8 @@
-# Use a base image with Java
-FROM openjdk:17-jdk-slim
+FROM maven:3.8.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the build artifact from the build stage
-COPY target/spring-boot-docker.jar /app/demo.jar
-
-# Expose the port your application runs on
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
-
-# Define the command to run the application
-ENTRYPOINT ["java", "-jar", "/app/demo.jar"]
+ENTRYPOINT ["java","-jar","demo.jar"]
