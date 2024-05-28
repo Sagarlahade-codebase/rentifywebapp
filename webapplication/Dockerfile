@@ -1,34 +1,13 @@
-#
-# Build stage
-#
-FROM maven:3-openjdk-17 AS build
+FROM maven:3.9.2-eclipse-temurin-17-alpine as builder
 
-# Set the working directory inside the container
-WORKDIR /app
+COPY ./src src/
+COPY ./pom.xml pom.xml
 
-# Copy the pom.xml and install dependencies
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy the rest of the project files
-COPY . .
-
-# Package the application
 RUN mvn clean package -DskipTests
 
-#
-# Package stage
-#
-FROM openjdk:17
-
-# Copy the jar file from the build stage
-COPY --from=build /app/target/spring-boot-docker.jar demo.jar
-
-# Set environment variable for the port (optional)
-# ENV PORT=
-
-# Expose the port on which the application will run
+FROM eclipse-temurin:17-jre-alpine
+COPY --from=builder target/*.jar app.jar
 EXPOSE 8080
-
-# Specify the command to run the application
-ENTRYPOINT ["java", "-jar", "demo.jar","Dockerfile"]
+ARG REDIS_HOST
+ARG REDIS_PORT
+CMD ["java","-jar","app.jar"]
