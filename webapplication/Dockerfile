@@ -1,16 +1,30 @@
+# Stage 1: Build the application
 FROM ubuntu:latest AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk maven
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application source code to the working directory
 COPY . .
 
-RUN apt-get install maven -y
-RUN mvn clean install 
+# Run Maven to build the application
+RUN mvn clean install
 
+# Stage 2: Run the application
 FROM openjdk:17-jdk-slim
 
+# Set the working directory inside the container
+WORKDIR /app
+
+# Expose the application port
 EXPOSE 8080
 
-COPY --from=build /target/spring-boot-docker.jar app.jar
+# Copy the built JAR file from the build stage
+COPY --from=build /app/target/spring-boot-docker.jar app.jar
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+# Set the entry point for the container
+ENTRYPOINT ["java", "-jar", "app.jar"]
