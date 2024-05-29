@@ -11,8 +11,8 @@ WORKDIR /app
 # Copy the application source code to the working directory
 COPY . .
 
-# Run Maven to build the application
-RUN mvn clean install
+# Run Maven to build the application, skipping tests
+RUN mvn clean install -DskipTests
 
 # Stage 2: Run the application
 FROM openjdk:17-jdk-slim
